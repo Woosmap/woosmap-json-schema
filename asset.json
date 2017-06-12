@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/asset.json#",
+  "title": "Woosmap Asset",
+  "description": "An Asset as expected for Woosmap Data API",
+  "type": "object",
+  "required": [
+    "location",
+    "name",
+    "storeId"
+  ],
+  "properties": {
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "storeId": {
+      "description": "The unique identifier for an  Asset",
+      "type": "string"
+    },
+    "name": {
+      "description": "The name for an Asset",
+      "type": "string"
+    },
+    "userProperties": {
+      "description": "Some additional information to use by client side application",
+      "type": "object"
+    },
+    "openingHours": {
+      "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/openingHours.json#"
+    },
+    "location": {
+      "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/location.json#"
+    },
+    "contact": {
+      "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/contact.json#"
+    },
+    "address": {
+      "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/address.json#"
+    }
+  }
+}

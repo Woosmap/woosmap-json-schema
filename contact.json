@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/contact.json#",
+  "title": "Woosmap Contact",
+  "description": "A Contact for an Asset",
+  "type": "object",
+  "properties": {
+    "website": {
+      "description": "URL to documents about the contact",
+      "type": "string",
+      "format": "uri"
+    },
+    "phone": {
+      "description": "A phone number for contact",
+      "type": "string",
+      "pattern": "^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$"
+    },
+    "email": {
+      "description": "An email address for contact",
+      "type": "string",
+      "format": "email"
+    }
+  },
+  "additionalProperties": false
+}
+
