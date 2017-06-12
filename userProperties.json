@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/userProperties.json#",
+  "title": "User Properties",
+  "description": "To store any user properties like photo urls, metadata, ...",
+  "type": "object",
+  "patternProperties": {
+    "^.*$": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "additionalProperties": true
+}

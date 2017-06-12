@@ -33,8 +33,7 @@
       "type": "string"
     },
     "userProperties": {
-      "description": "Some additional information to use by client side application",
-      "type": "object"
+      "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/userProperties.json#"
     },
     "openingHours": {
       "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/openingHours.json#"
