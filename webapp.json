@@ -1,0 +1,390 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/webapp.json#",
+  "title": "Woosmap Webapp",
+  "description": "A Configuration Dataset as expected for Woosmap WebApp",
+  "type": "object",
+  "definitions": {
+    "location": {
+      "required": [
+        "lat",
+        "lng"
+      ],
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "supportedTranslations": {
+      "properties": {
+        "fr": {
+          "type": [
+            "string",
+            "object"
+          ]
+        },
+        "en": {
+          "type": [
+            "string",
+            "object"
+          ]
+        },
+        "es": {
+          "type": [
+            "string",
+            "object"
+          ]
+        },
+        "nl": {
+          "type": [
+            "string",
+            "object"
+          ]
+        },
+        "de": {
+          "type": [
+            "string",
+            "object"
+          ]
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "properties": {
+        "anchor": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "integer"
+            },
+            "y": {
+              "type": "integer"
+            }
+          }
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "color": {
+      "type": "string",
+      "description": "Primary color for the webapp",
+      "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+    }
+  },
+  "properties": {
+    "internationalization": {
+      "description": "To specify Internationalization options. We currently support English, German, Nederland, French, Spain for labels in webapp and you can set custom translations for labels 'visitStorePage' and 'favoritebuttonview'.",
+      "type": "object",
+      "properties": {
+        "lang": {
+          "description": "language to display webapp text",
+          "enum": [
+            "fr",
+            "en",
+            "es",
+            "nl",
+            "de"
+          ]
+        },
+        "period": {
+          "description": "hour system to display openning hours - 'fr' (for 24h) or 'en-US' (for 12h))",
+          "enum": [
+            "fr",
+            "en-US"
+          ]
+        },
+        "unitSystem": {
+          "description": "unit system to display distance",
+          "type": "integer",
+          "pattern": "[0-1]"
+        },
+        "customTranslations": {
+          "description": "custom wording for 'visitStorePage' and 'setAsFavorite' links",
+          "type": "object",
+          "allOf": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/supportedTranslations"
+                }
+              ]
+            },
+            {
+              "type": "object"
+            },
+            {
+              "properties": {
+                "storeview": {
+                  "type": "object",
+                  "properties": {
+                    "visitStorePage": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "favoritebuttonview": {
+                  "type": "object",
+                  "properties": {
+                    "setAsFavorite": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+
+        }
+      }
+    },
+    "datasource": {
+      "description": "To specify the customer datasource - the api_key (equivalent to 'project_key' or sometimes called 'public_key').",
+      "type": "object",
+      "required": [
+        "api_key"
+      ],
+      "properties": {
+        "api_url": {
+          "description": "url of the api to retrieve data",
+          "type": "string",
+          "format": "uri"
+        },
+        "api_key": {
+          "description": "api key of the project",
+          "type": "string"
+        },
+        "max_responses": {
+          "description": "maximum number of stores to return in case of request",
+          "type": "integer"
+        },
+        "max_distance": {
+          "description": "maximum distance, in meter, between stores and location in case of research",
+          "type": "integer"
+        },
+        "base_filter": {
+          "description": "a filter to apply at all data (it disable the filter panel)",
+          "type": "string"
+        }
+      }
+    },
+    "theme": {
+      "description": "The Swag of the webapp (main color and secondary color for links)",
+      "type": "object",
+      "properties": {
+        "primary_color": {
+          "$ref": "#/definitions/color"
+        },
+        "secondary_color": {
+          "$ref": "#/definitions/color"
+        },
+        "storeWebsiteInSameWindow": {
+          "description": "select to open the store's website in a new window or ine the current window",
+          "type": "boolean"
+        }
+      }
+    },
+    "googlemaps": {
+      "descriptions": "Any options relative to Google Maps, such as the Customer API Key, a channel ID - to track page loads and more -, and options for Google Maps Places",
+      "type": "object",
+      "properties": {
+        "api_key": {
+          "description": "google maps api key",
+          "type": "string"
+        },
+        "client_key": {
+          "description": "google map client ID",
+          "type": "string"
+        },
+        "channel": {
+          "description": "A string to track usage across different applications using the same client ID",
+          "type": "string"
+        },
+        "places": {
+          "description": "PlacesOptions if 'places' key is in googlemaps object then places library will be use. Properties are compliant to https://developers.google.com/maps/documentation/javascript/3.exp/reference#AutocompletionRequest",
+          "type": "object"
+        }
+      }
+    },
+    "recommendation": {
+      "description": "If you want to display the WebApp in the opening of the page centered on the user recommended position",
+      "type": "object",
+      "properties": {
+        "useRecommendation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "woosmapview": {
+      "description": "To manage markers and behaviour for TiledView as well as MarkerView and some options which impact the opening of the page",
+      "type": "object",
+      "properties": {
+        "baseMapStyle": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "breakPoint": {
+          "type": "integer",
+          "pattern": "[O-22]"
+        },
+        "initialCenter": {
+          "$ref": "#/definitions/location"
+        },
+        "initialZoom": {
+          "type": "integer",
+          "pattern": "[O-22]"
+        },
+        "style": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "object",
+              "properties": {
+                "icon": {
+                  "$ref": "#/definitions/icon"
+                },
+                "selectedIcon": {
+                  "$ref": "#/definitions/icon"
+                },
+                "numberedIcon": {
+                  "$ref": "#/definitions/icon"
+                }
+              }
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "icon": {
+                    "$ref": "#/definitions/icon"
+                  },
+                  "numberedIcon": {
+                    "$ref": "#/definitions/icon"
+                  },
+                  "selectedIcon": {
+                    "$ref": "#/definitions/icon"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tileStyle": {
+          "type": "object",
+          "properties": {
+            "color": {
+              "$ref": "#/definitions/color"
+            },
+            "minSize": {
+              "type": "integer"
+            },
+            "size": {
+              "type": "integer"
+            },
+            "typeRules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "color": {
+                    "$ref": "#/definitions/color"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "zIndex": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "locationMarker": {
+          "$ref": "#/definitions/icon"
+        },
+        "startLocationMarker": {
+          "$ref": "#/definitions/icon"
+        }
+      }
+    },
+    "filters": {
+      "description": "To allow webapp users to filter and search for stores corresponding to given types and tags. if set, this option add buttons to refine results and map inside the webapp.",
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "propertyType": {
+                "enum": [
+                  "type",
+                  "tag"
+                ]
+              },
+              "title": {
+                "type": "object",
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/supportedTranslations"
+                  }
+                ]
+              },
+              "innerOperator": {
+                "enum": [
+                  "and",
+                  "or"
+                ]
+              },
+              "choices": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "properties": {
+                        "key": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "anyOf": [
+                        {
+                          "$ref": "#/definitions/supportedTranslations"
+                        }
+                      ]
+                    }
+                  ]
+
+                }
+              }
+            }
+          }
+        },
+        "outerOperator": {
+          "enum": [
+            "and",
+            "or"
+          ]
+        }
+      }
+    }
+  }
+}
