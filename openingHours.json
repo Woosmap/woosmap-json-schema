@@ -14,38 +14,36 @@
       "description": "The Opening Hours for an Asset",
       "properties": {
         "default": {
-          "description": "The Default opening Hours",
-          "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/openingHoursInDay.json#"
+          "description": "The Default opening Hours"
         },
         "1": {
-          "description": "The opening Hours for Monday",
-          "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/openingHoursInDay.json#"
+          "description": "The opening Hours for Monday"
         },
         "2": {
-          "description": "The opening Hours for Tuesday",
-          "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/openingHoursInDay.json#"
+          "description": "The opening Hours for Tuesday"
         },
         "3": {
-          "description": "The opening Hours for Wednesday",
-          "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/openingHoursInDay.json#"
+          "description": "The opening Hours for Wednesday"
         },
         "4": {
-          "description": "The opening Hours for Thirsday",
-          "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/openingHoursInDay.json#"
+          "description": "The opening Hours for Thirsday"
         },
         "5": {
-          "description": "The opening Hours for Friday",
-          "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/openingHoursInDay.json#"
+          "description": "The opening Hours for Friday"
         },
         "6": {
-          "description": "The opening Hours for Satruday",
-          "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/openingHoursInDay.json#"
+          "description": "The opening Hours for Satruday"
         },
         "7": {
-          "description": "The opening Hours for Sunday",
+          "description": "The opening Hours for Sunday"
+        }
+      },
+      "allOf": [
+        {
           "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/openingHoursInDay.json#"
         }
-      }
+      ],
+      "additionalProperties": false
     },
     "special": {
       "description": "Special dates for opening and closing hours",
