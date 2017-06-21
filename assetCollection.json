@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/assetCollection.json#",
+  "title": "Woosmap Assets Collection",
+  "description": "A Collection of Woosmap Assets as expected for Woosmap Data API",
+  "type": "object",
+  "required": [
+    "stores"
+  ],
+  "properties": {
+    "stores": {
+      "type": "array",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/asset.json#"
+      }
+    }
+  }
+}
