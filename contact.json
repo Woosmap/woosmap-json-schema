@@ -12,8 +12,7 @@
     },
     "phone": {
       "description": "A phone number for contact",
-      "type": "string",
-      "pattern": "^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$"
+      "type": "string"
     },
     "email": {
       "description": "An email address for contact",
