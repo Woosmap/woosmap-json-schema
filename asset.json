@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/asset.json#",
+    "id": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/asset.json#",
   "title": "Woosmap Asset",
   "description": "An Asset as expected for Woosmap Data API",
   "type": "object",
@@ -9,6 +9,193 @@
     "name",
     "storeId"
   ],
+  "definitions": {
+    "address": {
+      "id": "address",
+      "title": "Woosmap Address",
+      "description": "An Address of an Asset",
+      "type": "object",
+      "properties": {
+        "lines": {
+          "description": "an Array for lines of an Asset Address",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "countryCode": {
+          "description": "An ISO_3166-1 Country Code where the Asset is located (see https://en.wikipedia.org/wiki/ISO_3166-1 for full list)",
+          "type": "string"
+        },
+        "city": {
+          "description": "A City where belongs an Asset",
+          "type": "string"
+        },
+        "zipcode": {
+          "description": "An Zipcode / Postal code of an Asset Address",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "contact": {
+      "id": "contact",
+      "title": "Woosmap Contact",
+      "description": "A Contact for an Asset",
+      "type": "object",
+      "properties": {
+        "website": {
+          "description": "URL to documents about the contact",
+          "type": "string",
+          "format": "uri"
+        },
+        "phone": {
+          "description": "A phone number for contact",
+          "type": "string"
+        },
+        "email": {
+          "description": "An email address for contact",
+          "type": "string",
+          "format": "email"
+        }
+      },
+      "additionalProperties": false
+    },
+    "location": {
+      "id": "location",
+      "title": "Woosmap Location",
+      "description": "A geographical coordinate for an Asset representing a lat/lng pair",
+      "type": "object",
+      "required": [
+        "lat",
+        "lng"
+      ],
+      "properties": {
+        "lat": {
+          "description": "The latitude in degrees. It must be in the range [-90.0, +90.0].",
+          "type": "number",
+          "format": "double"
+        },
+        "lng": {
+          "description": "The longitude in degrees. It must be in the range [-180.0, +180.0].",
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "openingHours": {
+      "id": "openingHours",
+      "title": "Opening Hours",
+      "type": "object",
+      "description": "The Opening Hours for an Asset",
+      "definitions": {
+        "openingHoursInDay": {
+          "id": "openingHoursInDay",
+          "title": "Opening Hours in a Day",
+          "description": "Opening Hours in a Day",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string"
+              },
+              "end": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "usualHours": {
+          "type": "object",
+          "description": "The Opening Hours for an Asset",
+          "properties": {
+            "default": {
+              "description": "The Default opening Hours"
+            },
+            "1": {
+              "description": "The opening Hours for Monday"
+            },
+            "2": {
+              "description": "The opening Hours for Tuesday"
+            },
+            "3": {
+              "description": "The opening Hours for Wednesday"
+            },
+            "4": {
+              "description": "The opening Hours for Thirsday"
+            },
+            "5": {
+              "description": "The opening Hours for Friday"
+            },
+            "6": {
+              "description": "The opening Hours for Satruday"
+            },
+            "7": {
+              "description": "The opening Hours for Sunday"
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/openingHoursInDay"
+            }
+          ],
+          "additionalProperties": false
+        },
+        "specialHours": {
+          "description": "Special dates for opening and closing hours",
+          "type": "object",
+          "patternProperties": {
+            "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/openingHoursInDay"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "properties": {
+        "timezone": {
+          "description": "String Timezone for the Opening Hours of an Assets (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)",
+          "type": "string"
+        },
+        "special": {
+          "$ref": "#/definitions/specialHours"
+        },
+        "usual": {
+          "$ref": "#/definitions/usualHours"
+        }
+      }
+    },
+    "userProperties": {
+      "id": "userProperties",
+      "title": "User Properties",
+      "description": "To store any user properties like photo urls, metadata, ...",
+      "type": "object",
+      "patternProperties": {
+        "^.*$": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
   "properties": {
     "tags": {
       "type": "array",
@@ -33,19 +220,20 @@
       "type": "string"
     },
     "userProperties": {
-      "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/userProperties.json#"
+      "$ref": "#/definitions/address"
     },
     "openingHours": {
-      "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/openingHours.json#"
+      "$ref": "#/definitions/openingHours"
     },
     "location": {
-      "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/location.json#"
+      "$ref": "#/definitions/location"
     },
     "contact": {
-      "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/contact.json#"
+      "$ref": "#/definitions/contact"
     },
     "address": {
-      "$ref": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/address.json#"
+      "$ref": "#/definitions/address"
     }
   }
+
 }
