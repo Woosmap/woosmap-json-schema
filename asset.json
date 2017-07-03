@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/asset.json#",
+  "id": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/asset.json#",
   "title": "Woosmap Asset",
   "description": "An Asset as expected for Woosmap Data API",
   "type": "object",
@@ -106,46 +106,55 @@
               }
             }
           }
+        }
+      },
+      "properties": {
+        "timezone": {
+          "description": "String Timezone for the Opening Hours of an Assets (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)",
+          "type": "string"
         },
-        "usualHours": {
+        "usual": {
           "type": "object",
           "description": "The Opening Hours for an Asset",
           "properties": {
             "default": {
-              "description": "The Default opening Hours"
+              "description": "The Default opening Hours",
+              "$ref": "#/definitions/openingHoursInDay"
             },
             "1": {
-              "description": "The opening Hours for Monday"
+              "description": "The opening Hours for Monday",
+              "$ref": "#/definitions/openingHoursInDay"
             },
             "2": {
-              "description": "The opening Hours for Tuesday"
+              "description": "The opening Hours for Tuesday",
+              "$ref": "#/definitions/openingHoursInDay"
             },
             "3": {
-              "description": "The opening Hours for Wednesday"
+              "description": "The opening Hours for Wednesday",
+              "$ref": "#/definitions/openingHoursInDay"
             },
             "4": {
-              "description": "The opening Hours for Thirsday"
+              "description": "The opening Hours for Thursday",
+              "$ref": "#/definitions/openingHoursInDay"
             },
             "5": {
-              "description": "The opening Hours for Friday"
+              "description": "The opening Hours for Friday",
+              "$ref": "#/definitions/openingHoursInDay"
             },
             "6": {
-              "description": "The opening Hours for Satruday"
+              "description": "The opening Hours for Saturday",
+              "$ref": "#/definitions/openingHoursInDay"
             },
             "7": {
-              "description": "The opening Hours for Sunday"
-            }
-          },
-          "allOf": [
-            {
+              "description": "The opening Hours for Sunday",
               "$ref": "#/definitions/openingHoursInDay"
             }
-          ],
+          },
           "additionalProperties": false
         },
-        "specialHours": {
-          "description": "Special dates for opening and closing hours",
+        "special": {
           "type": "object",
+          "description": "Special dates for opening and closing hours",
           "patternProperties": {
             "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$": {
               "allOf": [
@@ -155,18 +164,6 @@
               ]
             }
           }
-        }
-      },
-      "properties": {
-        "timezone": {
-          "description": "String Timezone for the Opening Hours of an Assets (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)",
-          "type": "string"
-        },
-        "special": {
-          "$ref": "#/definitions/specialHours"
-        },
-        "usual": {
-          "$ref": "#/definitions/usualHours"
         }
       }
     },
@@ -197,6 +194,14 @@
     }
   },
   "properties": {
+    "storeId": {
+      "description": "The unique identifier for an  Asset",
+      "type": "string"
+    },
+    "name": {
+      "description": "The name for an Asset",
+      "type": "string"
+    },
     "tags": {
       "type": "array",
       "items": {
@@ -211,20 +216,6 @@
       },
       "uniqueItems": true
     },
-    "storeId": {
-      "description": "The unique identifier for an  Asset",
-      "type": "string"
-    },
-    "name": {
-      "description": "The name for an Asset",
-      "type": "string"
-    },
-    "userProperties": {
-      "$ref": "#/definitions/userProperties"
-    },
-    "openingHours": {
-      "$ref": "#/definitions/openingHours"
-    },
     "location": {
       "$ref": "#/definitions/location"
     },
@@ -233,7 +224,12 @@
     },
     "address": {
       "$ref": "#/definitions/address"
+    },
+    "openingHours": {
+      "$ref": "#/definitions/openingHours"
+    },
+    "userProperties": {
+      "$ref": "#/definitions/userProperties"
     }
   }
-
 }
