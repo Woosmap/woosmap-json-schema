@@ -77,7 +77,7 @@
     "color": {
       "type": "string",
       "description": "Primary color for the webapp",
-      "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+      "format": "color"
     }
   },
   "properties": {
