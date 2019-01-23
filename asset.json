@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "id": "https://raw.githubusercontent.com/woosmap/woosmap-json-schema/master/asset.json#",
   "title": "Woosmap Asset",
   "description": "An Asset as expected for Woosmap Data API",
@@ -84,23 +84,6 @@
       },
       "additionalProperties": false
     },
-    "openingHoursInDay": {
-      "id": "openingHoursInDay",
-      "title": "Opening Hours in a Day",
-      "description": "Opening Hours in a Day",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "start": {
-            "type": "string"
-          },
-          "end": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "openingHours": {
       "id": "openingHours",
       "title": "Opening Hours",
@@ -161,6 +144,23 @@
                 }
               ]
             }
+          }
+        }
+      }
+    },
+    "openingHoursInDay": {
+      "id": "openingHoursInDay",
+      "title": "Opening Hours in a Day",
+      "description": "Opening Hours in a Day",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string"
+          },
+          "end": {
+            "type": "string"
           }
         }
       }
