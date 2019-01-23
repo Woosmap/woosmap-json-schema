@@ -100,35 +100,123 @@
           "properties": {
             "default": {
               "description": "The Default opening Hours",
-              "$ref": "#/definitions/openingHoursInDay"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string"
+                  },
+                  "end": {
+                    "type": "string"
+                  }
+                }
+              }
             },
             "1": {
               "description": "The opening Hours for Monday",
-              "$ref": "#/definitions/openingHoursInDay"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string"
+                  },
+                  "end": {
+                    "type": "string"
+                  }
+                }
+              }
             },
             "2": {
               "description": "The opening Hours for Tuesday",
-              "$ref": "#/definitions/openingHoursInDay"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string"
+                  },
+                  "end": {
+                    "type": "string"
+                  }
+                }
+              }
             },
             "3": {
               "description": "The opening Hours for Wednesday",
-              "$ref": "#/definitions/openingHoursInDay"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string"
+                  },
+                  "end": {
+                    "type": "string"
+                  }
+                }
+              }
             },
             "4": {
               "description": "The opening Hours for Thursday",
-              "$ref": "#/definitions/openingHoursInDay"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string"
+                  },
+                  "end": {
+                    "type": "string"
+                  }
+                }
+              }
             },
             "5": {
               "description": "The opening Hours for Friday",
-              "$ref": "#/definitions/openingHoursInDay"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string"
+                  },
+                  "end": {
+                    "type": "string"
+                  }
+                }
+              }
             },
             "6": {
               "description": "The opening Hours for Saturday",
-              "$ref": "#/definitions/openingHoursInDay"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string"
+                  },
+                  "end": {
+                    "type": "string"
+                  }
+                }
+              }
             },
             "7": {
               "description": "The opening Hours for Sunday",
-              "$ref": "#/definitions/openingHoursInDay"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string"
+                  },
+                  "end": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           },
           "additionalProperties": false
@@ -140,27 +228,21 @@
             "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/openingHoursInDay"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "start": {
+                        "type": "string"
+                      },
+                      "end": {
+                        "type": "string"
+                      }
+                    }
+                  }
                 }
               ]
             }
-          }
-        }
-      }
-    },
-    "openingHoursInDay": {
-      "id": "openingHoursInDay",
-      "title": "Opening Hours in a Day",
-      "description": "Opening Hours in a Day",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "start": {
-            "type": "string"
-          },
-          "end": {
-            "type": "string"
           }
         }
       }
