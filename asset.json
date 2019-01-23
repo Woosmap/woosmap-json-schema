@@ -84,30 +84,28 @@
       },
       "additionalProperties": false
     },
+    "openingHoursInDay": {
+      "id": "openingHoursInDay",
+      "title": "Opening Hours in a Day",
+      "description": "Opening Hours in a Day",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string"
+          },
+          "end": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "openingHours": {
       "id": "openingHours",
       "title": "Opening Hours",
       "type": "object",
       "description": "The Opening Hours for an Asset",
-      "definitions": {
-        "openingHoursInDay": {
-          "id": "openingHoursInDay",
-          "title": "Opening Hours in a Day",
-          "description": "Opening Hours in a Day",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "start": {
-                "type": "string"
-              },
-              "end": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
       "properties": {
         "timezone": {
           "description": "String Timezone for the Opening Hours of an Assets (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)",
